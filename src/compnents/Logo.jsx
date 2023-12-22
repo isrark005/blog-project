@@ -1,11 +1,11 @@
 import React from 'react'
 
-export function Footer() {
+export function Logo({width = '100px'}) {
     
 
     return (
         <>
-            <div>Footer</div>
+            <div>Logo</div>
         </>
     )
 }

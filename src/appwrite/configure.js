@@ -24,7 +24,7 @@ export class Services {
                 {
                     title,
                     content,
-                    featuredImage,
+                    featuredImage, //Here featuredImage is actully an ID of a image stored in a database
                     status,
                     author,
                 });

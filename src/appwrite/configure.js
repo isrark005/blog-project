@@ -102,7 +102,7 @@ export class Services {
         }
     }
 
-    async deletePost(fileId) {
+    async deleteFile(fileId) {
         try {
             return await this.storage.deleteFile(
                 appWriteBucketId,
@@ -122,5 +122,5 @@ export class Services {
 }
 
 
-const services = Services()
+const services = new Services()
 export default services;

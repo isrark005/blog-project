@@ -8,7 +8,7 @@ import Input from "./Input";
 import { RTE } from "./RTE";
 import { Login } from './Login'
 import { Signup } from './Signup'
-import { PostCard } from './PostCard'
+import PostCard from './PostCard'
 import { PostForm } from './PostForm/PostForm'
 import Select from './Select'
 
@@ -24,5 +24,6 @@ export {
     Login, 
     Signup,
     PostCard,
-    PostForm
+    PostForm,
+    Select
 }

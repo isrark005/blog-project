@@ -21,7 +21,7 @@ export function Signup(props) {
             if(userData){
                 const userData = await authService.getCurrentUser()
                 if(userData) dispatch(authLogin(userData));
-                navigate('/')
+                navigate('/login')
             }
         } catch (error) {
             setError(error.message)

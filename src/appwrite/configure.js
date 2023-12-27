@@ -20,12 +20,13 @@ export class Services {
             return await this.databases.createDocument(
                 config.appWriteDatabaseId,
                 config.appWriteCollectionId,
-                slug, 
+                ID.unique(), 
                 {
                     title,
                     content,
                     featuredImage, //Here featuredImage is actully an ID of a image stored in a database
                     status,
+                    slug,
                     author,
                 });
         } catch (error) {
@@ -92,7 +93,7 @@ export class Services {
     async uploadFile(file){
         try {
             return await this.storage.createFile(
-                appWriteBucketId,
+                config.appWriteBucketId,
                 ID.unique(),
                 file,
                 )
@@ -105,7 +106,7 @@ export class Services {
     async deleteFile(fileId) {
         try {
             return await this.storage.deleteFile(
-                appWriteBucketId,
+                config.appWriteBucketId,
                 fileId,)
 
         } catch (error) {
@@ -116,7 +117,7 @@ export class Services {
 
     getFilePreview(fileId){
         return this.storage.getFilePreview(
-            appWriteBucketId,
+            config.appWriteBucketId,
             fileId,)
     }
 }

@@ -48,12 +48,11 @@ export function PostForm(post) {
     }
 
     const transformSlug = useCallback((value)=> {
-        if(value && typeof value === 'string'){
-            return value.trim()
+        if(value && typeof value === 'string') return value.trim()
             .toLowerCase()
             .replace(/[^a-zA-Z\d\s]+/g, "-")
             .replace(/\s/g, "-");
-        }
+        
         return ''
     }, [])
 
@@ -69,7 +68,7 @@ export function PostForm(post) {
         return () => {
             subscription.unsubscribe()
         }
-    }, [watch, slugTransform, setValue])
+    }, [watch, transformSlug, setValue])
 
     return (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
@@ -86,7 +85,7 @@ export function PostForm(post) {
                 className="mb-4"
                 {...register("slug", { required: true })}
                 onInput={(e) => {
-                    setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
+                    setValue("slug", transformSlug(e.currentTarget.value), { shouldValidate: true });
                 }}
             />
             <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />

@@ -9,7 +9,8 @@ export function LogoutBtn(props) {
     const logoutHandler = ()=> {
         authService.logout()
         .then(()=> {
-            dispatch(logout())
+            dispatch(logout());
+
         }).catch((error)=>{
             console.error('error on logout button:', error)
         })

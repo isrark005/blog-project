@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {LogoutBtn, Logo, Container} from '../index'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import authService from '../../appwrite/auth'
 
 export function Header() {
+    const [checkLogin, setcheckLogin] = useState(false)
     const authStatus = useSelector((state)=> state.auth.status)
-
-    const navigate = useNavigate()
+    console.log(authStatus);
     
+    const navigate = useNavigate()
+ 
+
     const navItems = [
         {
           name: 'Home',
@@ -22,12 +25,12 @@ export function Header() {
       },
       {
           name: "Signup",
-          slug: "/signup",
+          slug: "/create-account",
           active: !authStatus,
       },
       {
           name: "All Posts",
-          slug: "/all-posts",
+          slug: "/blogs",
           active: authStatus,
       },
       {
@@ -54,7 +57,7 @@ export function Header() {
                             >{item.name}</button>
                         </li> : null
                         )}
-                        {authService && ( 
+                        {authStatus && ( 
                            <li>
                                 <LogoutBtn />
                             </li>

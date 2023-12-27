@@ -1,27 +1,34 @@
 import React, { useState } from 'react'
 import { login as authLogin } from '../store/authSlice'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm} from 'react-hook-form'
 import { Button, Input } from './index'
 import authService from '../appwrite/auth'
+import { Logo } from './index'
 
 
-export function Signup(props) {
+
+export function Signup() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const {register, handleSubmit} = useForm()
     const [error, setError] = useState("")
-
+    const authStatus = useSelector((state)=> state.auth.status)
     const create = async(data) => {
         setError("")
 
         try {
             const userData = await authService.createAccount(data)
+            console.log({userData});
             if(userData){
-                const userData = await authService.getCurrentUser()
-                if(userData) dispatch(authLogin(userData));
-                navigate('/')
+                const session = await authService.login(userData.email,userData.password);
+                if (session) {
+                    const logedinUserData = await authService.getCurrentUser();
+                    if (logedinUserData) dispatch(authLogin(logedinUserData));
+                        if (authStatus) navigate( '/')
+                }
+                        
             }
         } catch (error) {
             setError(error.message)

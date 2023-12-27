@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useForm} from 'react-hook-form'
 import { Button, Input, Logo } from './index'
 import authService from '../appwrite/auth'
+import { Link } from 'react-router-dom'
 
 export function Login() {
     const navigate = useNavigate()
@@ -19,13 +20,15 @@ export function Login() {
             if (session) {
                 const userData = await authService.getCurrentUser();
                 if (userData) dispatch(authLogin(userData));
-                navigate('/')
+                // navigate('/')
             } 
         }catch (error) {
             setError(error.message)
         }
 
     }
+
+
 
     return (
         <div className='flex items-center justify-center w-full'>

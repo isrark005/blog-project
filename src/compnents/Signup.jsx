@@ -20,15 +20,12 @@ export function Signup() {
 
         try {
             const userData = await authService.createAccount(data)
-            console.log({userData});
+
             if(userData){
-                const session = await authService.login(userData.email,userData.password);
-                if (session) {
-                    const logedinUserData = await authService.getCurrentUser();
-                    if (logedinUserData) dispatch(authLogin(logedinUserData));
-                        if (authStatus) navigate( '/')
-                }
-                        
+                const session = await authService.getCurrentUser()
+                console.log(session);
+                if(session) dispatch(authLogin(session));
+                navigate('/login')
             }
         } catch (error) {
             setError(error.message)

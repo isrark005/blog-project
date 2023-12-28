@@ -22,11 +22,9 @@ export function Signup() {
             const userData = await authService.createAccount(data)
 
             if(userData){
-                const session = await authService.getCurrentUser()
-                console.log(session);
-                if(session) dispatch(authLogin(session));
-                navigate('/login')
-                
+                const userData = await authService.getCurrentUser()
+                if(userData) dispatch(authLogin(userData));
+                navigate('/')
             }
         } catch (error) {
             setError(error.message)

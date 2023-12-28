@@ -26,6 +26,7 @@ export function Signup() {
                 console.log(session);
                 if(session) dispatch(authLogin(session));
                 navigate('/login')
+                
             }
         } catch (error) {
             setError(error.message)

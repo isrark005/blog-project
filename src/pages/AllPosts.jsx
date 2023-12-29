@@ -11,16 +11,18 @@ export function AllPosts() {
             if (posts) {
                 setPosts(posts.documents)
             }
+
         }).catch((error)=>{
             console.error('Error fetching posts:', error);
         })
     }, [])
-
     return (
         <div className='py-8'>
             <Container>
                 {posts && posts.map((post)=> (
-                    <PostCard key={post.$id} post={post} />
+                   <div key={post.$id} className='p-2 w-1/4'>
+                   <PostCard {...post} />
+               </div>
                 ))}
             </Container>
         </div>

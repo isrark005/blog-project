@@ -5,7 +5,8 @@ import { Input, Select, RTE, Button} from '../index'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export function PostForm(post) {
+export function PostForm({post}) {
+
     const {register, handleSubmit, watch, getValues, setValue, control} = useForm({
         defaultValues: {
             title: post?.title || '',
@@ -36,6 +37,7 @@ export function PostForm(post) {
             const file =  await appwriteService.uploadFile(data.image[0])
 
             if (file) {
+                console.log(file);
                 const fileID = file.$id
                 data.featuredImage = fileID
                 const dbPost = await appwriteService.createPost({...data, author: userData.$id })
@@ -98,22 +100,22 @@ export function PostForm(post) {
                 accept="image/png, image/jpg, image/jpeg, image/gif"
                 {...register("image", { required: !post })}
             />
-            {post && (
+            {post && 
                 <div className="w-full mb-4">
-                    <img
+                  <img
                         src={appwriteService.getFilePreview(post.featuredImage)}
                         alt={post.title}
                         className="rounded-lg"
-                    />
+                    /> 
                 </div>
-            )}
+                    }
             <Select
                 options={["active", "inactive"]}
                 label="Status"
                 className="mb-4"
                 {...register("status", { required: true })}
             />
-            <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+            <Button type="submit" bgColor={post ? "bg-green-500" : " text-white bg-blue-400"} className="w-full ">
                 {post ? "Update" : "Publish"}
             </Button>
         </div>

@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux'
 import authService from '../../appwrite/auth'
 
 export function Header() {
-    const [checkLogin, setcheckLogin] = useState(false)
+   
     const authStatus = useSelector((state)=> state.auth.status)
-    console.log(authStatus);
+  
     
     const navigate = useNavigate()
  

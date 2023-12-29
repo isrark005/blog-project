@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { Client, Databases, Storage } from "appwrite";
+import { Client, Databases, Storage, ID } from "appwrite";
 
 
 export class Services {
@@ -20,13 +20,12 @@ export class Services {
             return await this.databases.createDocument(
                 config.appWriteDatabaseId,
                 config.appWriteCollectionId,
-                ID.unique(), 
+                slug, 
                 {
                     title,
                     content,
                     featuredImage, //Here featuredImage is actully an ID of a image stored in a database
                     status,
-                    slug,
                     author,
                 });
         } catch (error) {
@@ -66,11 +65,11 @@ export class Services {
     
     async getPost(slug) {
         try {
-            await this.databases.getDocument(
+            return await this.databases.getDocument(
                 config.appWriteDatabaseId, 
                 config.appWriteCollectionId,  
-                slug,)
-                return true;
+                slug)
+                
         } catch (error) {
             console.log("Appwrite service :: getPost :: error", error);
             return false;
@@ -107,7 +106,7 @@ export class Services {
         try {
             return await this.storage.deleteFile(
                 config.appWriteBucketId,
-                fileId,)
+                fileId)
 
         } catch (error) {
             console.log("Appwrite service :: deleteFile :: error", error);
@@ -118,7 +117,7 @@ export class Services {
     getFilePreview(fileId){
         return this.storage.getFilePreview(
             config.appWriteBucketId,
-            fileId,)
+            fileId)
     }
 }
 

@@ -15,6 +15,7 @@ export function Signup() {
     const {register, handleSubmit} = useForm()
     const [error, setError] = useState("")
     const authStatus = useSelector((state)=> state.auth.status)
+    
     const create = async(data) => {
         setError("")
 
@@ -22,8 +23,10 @@ export function Signup() {
             const userData = await authService.createAccount(data)
 
             if(userData){
-                const userData = await authService.getCurrentUser()
-                if(userData) dispatch(authLogin(userData));
+              
+                const session = await authService.getCurrentUser()
+               
+                if(session) dispatch(authLogin({userData}));
                 navigate('/')
             }
         } catch (error) {

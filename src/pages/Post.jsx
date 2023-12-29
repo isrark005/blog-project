@@ -19,7 +19,18 @@ export default function Post() {
             appwriteService.getPost(slug).then((post) => {
                 if (post) setPost(post);
                 else navigate("/");
+                console.log(post);
             });
+        //  async function data(){
+        //     try {
+        //         const blog = await appwriteService.getPost(slug)
+        //         console.log(blog);
+        //     } catch (error) {
+        //         console.log("post finding", error);
+        //     }
+        // }
+        // data();
+
         } else navigate("/");
     }, [slug, navigate]);
 
@@ -63,5 +74,5 @@ export default function Post() {
                     </div>
             </Container>
         </div>
-    ) : null;
+    ) : <div>No post</div>;
 }

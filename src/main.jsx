@@ -4,7 +4,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { AddPost, AllPosts, EditPost, Home, Post, Signin, Signup } from './pages'
+import { AddPost, AllPosts, EditPost, Home, Post, Signin, Signup, MyProfile } from './pages'
 import { Protection } from './compnents/AuthLayout.jsx'
 import App from './App.jsx'
 
@@ -54,13 +54,20 @@ const router = createBrowserRouter([
           </Protection>
         )
       },{
-        path: '/blog/edit-post/:slug',
+        path: '/edit-post/:slug',
         element: (
           <Protection authentication>
             <EditPost />
           </Protection>
         )
-      },
+      },{
+        path: '/user/:userID',
+        element: (
+          <Protection authentication>
+            <MyProfile />
+          </Protection>
+        )
+      }
     ]
   }
 ])

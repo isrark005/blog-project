@@ -72,6 +72,9 @@ export default function Post() {
                 <div className="browser-css">
                     {parse(post.content)}
                     </div>
+                <div className="author-name">
+                    {post.authorName}
+                </div>
             </Container>
         </div>
     ) : <div>No post</div>;

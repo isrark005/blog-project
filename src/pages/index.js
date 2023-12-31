@@ -5,7 +5,7 @@ import { Home } from "./Home";
 import Post from "./Post";
 import { Signin } from "./Signin";
 import { Signup } from "./Signup";
-
+import { MyProfile } from "./myProfile";
 export {
     AddPost,
     AllPosts,
@@ -13,5 +13,6 @@ export {
     Home,
     Post,
     Signin,
-    Signup
+    Signup,
+    MyProfile
 }

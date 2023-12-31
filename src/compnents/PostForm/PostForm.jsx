@@ -7,16 +7,19 @@ import { useSelector } from 'react-redux'
 
 export function PostForm({post}) {
 
+    const navigate = useNavigate()
+    const userData = useSelector(state => state.auth.userData)
+
     const {register, handleSubmit, watch, getValues, setValue, control} = useForm({
         defaultValues: {
             title: post?.title || '',
             slug: post?.$id || '',
             content: post?.content || '',
             status: post?.status || 'active',
+            authorName: post?.authorName || userData.name
         }
     })
-    const navigate = useNavigate()
-    const userData = useSelector(state => state.auth.userData)
+
 
     const submit = async(data) => {
         if (post) {
@@ -40,7 +43,7 @@ export function PostForm({post}) {
                 console.log(file);
                 const fileID = file.$id
                 data.featuredImage = fileID
-                const dbPost = await appwriteService.createPost({...data, author: userData.$id })
+                const dbPost = await appwriteService.createPost({...data, author: userData.$id, authorName: userData.name })
 
                 if(dbPost){
                     navigate(`/post/${dbPost.$id}`)
@@ -115,6 +118,14 @@ export function PostForm({post}) {
                 className="mb-4"
                 {...register("status", { required: true })}
             />
+
+            <Input 
+            label={post ? 'Updating as: ' : 'Posting as: '}
+            value={userData.name}
+            readonly
+            className='text-left mb-4'
+            {...register("authorName", {required: true})}
+            />    
             <Button type="submit" bgColor={post ? "bg-green-500" : " text-white bg-blue-400"} className="w-full ">
                 {post ? "Update" : "Publish"}
             </Button>

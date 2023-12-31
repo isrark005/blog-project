@@ -15,7 +15,7 @@ export class Services {
         this.storage = new Storage(this.client)
     }
 
-    async createPost({title, slug, content, featuredImage, status, author}) {
+    async createPost({title, slug, content, featuredImage, status, author, authorName}) {
         try {
             return await this.databases.createDocument(
                 config.appWriteDatabaseId,
@@ -27,6 +27,7 @@ export class Services {
                     featuredImage, //Here featuredImage is actully an ID of a image stored in a database
                     status,
                     author,
+                    authorName
                 });
         } catch (error) {
             console.log("Appwrite service :: createPost :: error", error);

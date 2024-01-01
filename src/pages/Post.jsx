@@ -77,5 +77,5 @@ export default function Post() {
                 </div>
             </Container>
         </div>
-    ) : <div>No post</div>;
+    ) : <div>Loading...</div>;
 }

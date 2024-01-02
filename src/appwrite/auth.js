@@ -62,6 +62,18 @@ export class AuthService {
             console.log("Appwrite service :: logout :: error", error);
         }
     }
+
+
+    async updatePassword(newPassword, oldPassword) {
+        try {
+            const changedPassword = await this.account.updatePassword(newPassword, oldPassword)
+
+            if(changedPassword) return true
+        } catch (error) {
+            console.log("Appwrite service :: updatePassword :: error", error);
+            return false
+        }
+    }
 }
 
 

@@ -56,7 +56,7 @@ export function Home() {
                         className=' bg-transparent border-2 rounder-lg'
                         children={userData ? 'All posts' : 'Signup'} /></Link>
                     </div>
-                    <div className='header-right w-6/12 py-10 justify-end'>
+                    <div className='header-right w-6/12 py-10 justify-end '>
                     <img src={headerImage} alt="" className='float-right'/>
 
                     </div>

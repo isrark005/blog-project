@@ -31,6 +31,7 @@ export function MyProfile() {
         return await appwriteService.updateName(name.updateName)
         .then((updatedName)=>(
             setPfName(updatedName.name)
+            
         ))
       } catch (error) {
         console.log(error);

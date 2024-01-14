@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { useSelector } from 'react-redux'
+import React, {useState, useEffect} from 'react'
+import { useSelector, useStore } from 'react-redux'
 import { Button, Container, Input } from '../compnents'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -12,30 +12,28 @@ export function MyProfile() {
     const userInfo = useSelector(state => state.auth.userData)
     const fullName = userInfo.name.split(' ')
     const firstName = fullName[0]
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit, reset} = useForm()
+    const [isSafeToReset, setIsSafeToReset] = useState(false);
     const [pfname, setPfName] = useState(userInfo.name)
 
-    const handleInputChange = (e) => {
-    const value = e.target.value;
 
-    if (value) {
-      setShowAnotherField(true);
-    } else {
-      setShowAnotherField(false);
-    }
-  };
-
+    useEffect(() => {
+      if (!isSafeToReset) return;
+   
+      reset({updateName: ''}); 
+   }, [pfname])
   
-    const nameChange = async(name) => {
+    const nameChange = async(name, e) => {
       try {
         return await appwriteService.updateName(name.updateName)
         .then((updatedName)=>(
-            setPfName(updatedName.name)
-            
+            setPfName(updatedName.name)   
         ))
+        .then((e)=> setIsSafeToReset(true))
       } catch (error) {
         console.log(error);
       }
+      
 }
 
 
